@@ -9,4 +9,4 @@ build:
 deploy:
   kubectl:
     manifests:
-    - deployment.yaml
+    - grpc-route-guide-server.yaml

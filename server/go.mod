@@ -1,4 +1,4 @@
-module github.com/scranton/examples/route_guide/server
+module github.com/scranton/route_guide/server
 
 go 1.12
 
