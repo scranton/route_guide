@@ -1,0 +1,45 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grpc-route-guide-server
+  labels:
+    app: grpc-route-guide-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grpc-route-guide-server
+  template:
+    metadata:
+      labels:
+        app: grpc-route-guide-server
+    spec:
+      containers:
+      - name: grpc-route-guide-server
+        image: quay.io/scottcranton/grpc-route-guide-server
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 10000
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grpc-route-guide-server
+  labels:
+    app: grpc-route-guide-server
+spec:
+  ports:
+  - name: grpc
+    port: 10000
+    targetPort: 10000
+    protocol: TCP
+  selector:
+    app: grpc-route-guide-server
